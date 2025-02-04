@@ -3,6 +3,6 @@ Start-Process -FilePath './553.62_grid_win10_win11_server2019_server2022_dch_64b
 Remove-Item -Path './553.62_grid_win10_win11_server2019_server2022_dch_64bit_international_azure_swl.exe'
 Invoke-WebRequest -Uri 'https://github.com/NatronGitHub/Natron/releases/download/v2.5.0/Natron-2.5.0-Windows-x86_64.zip' -OutFile './Natron-2.5.0-Windows-x86_64.zip' # https://natrongithub.github.io/
 Expand-Archive -Path './Natron-2.5.0-Windows-x86_64.zip' -DestinationPath '.'
-Start-Process -FilePath './Natron-2.5.0-Windows-x86_64\Setup.exe' -ArgumentList '/SILENT' -Wait
+Start-Process -FilePath './Natron-2.5.0-Windows-x86_64\Setup.exe' -ArgumentList '/SILENT', '/ALLUSERS' -Wait
 Remove-Item -Path './Natron-2.5.0-Windows-x86_64.zip', './Natron-2.5.0-Windows-x86_64' -Recurse
 Restart-Computer -Force
