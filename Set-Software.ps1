@@ -38,7 +38,7 @@ if ($OS -eq 'Windows') {
         Remove-Item -Path '.\553.62_grid_win10_win11_server2019_server2022_dch_64bit_international_azure_swl.exe'
     }
     elseif ($GPU -eq 'Azure NVv4') {
-        Invoke-WebRequest -Uri 'https://download.microsoft.com/download/0/8/1/081db0c3-d2c0-44ae-be45-90a63610b16e/AMD-Azure-NVv4-Driver-23Q3-win10-win11.exe' -OutFile '.\AMD-Azure-NVv4-Driver-23Q3-win10-win11.exe' # https://learn.microsoft.com/en-us/azure/virtual-machines/windows/n-series-amd-driver-setup
+        Invoke-WebRequest -Uri 'https://download.microsoft.com/download/2/d/3/2d328d15-4188-4fdb-8912-fb300a212dfc/AMD-Azure-NVv4-Driver-23Q3-winsvr2022.exe' -OutFile '.\AMD-Azure-NVv4-Driver-23Q3-winsvr2022.exe' # https://learn.microsoft.com/en-us/azure/virtual-machines/windows/n-series-amd-driver-setup
         Start-Process -FilePath '.\AMD-Azure-NVv4-Driver-23Q3-win10-win11.exe' -ArgumentList '/install' -Wait # Test
         Remove-Item -Path '.\AMD-Azure-NVv4-Driver-23Q3-win10-win11.exe'
     }
