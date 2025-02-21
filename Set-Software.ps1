@@ -39,8 +39,8 @@ if ($OS -eq 'Windows') {
     }
     elseif ($GPU -eq 'Azure NVv4') {
         Invoke-WebRequest -Uri 'https://download.microsoft.com/download/2/d/3/2d328d15-4188-4fdb-8912-fb300a212dfc/AMD-Azure-NVv4-Driver-23Q3-winsvr2022.exe' -OutFile '.\AMD-Azure-NVv4-Driver-23Q3-winsvr2022.exe' # https://learn.microsoft.com/en-us/azure/virtual-machines/windows/n-series-amd-driver-setup
-        Start-Process -FilePath '.\AMD-Azure-NVv4-Driver-23Q3-win10-win11.exe' -ArgumentList '/install' -Wait # Test
-        Remove-Item -Path '.\AMD-Azure-NVv4-Driver-23Q3-win10-win11.exe'
+        Start-Process -FilePath '.\AMD-Azure-NVv4-Driver-23Q3-winsvr2022.exe' -ArgumentList '/install' -Wait # Test
+        Remove-Item -Path '.\AMD-Azure-NVv4-Driver-23Q3-winsvr2022.exe'
     }
     if ($Software -eq 'Natron') {
         Invoke-WebRequest -Uri 'https://github.com/NatronGitHub/Natron/releases/download/v2.5.0/Natron-2.5.0-Windows-x86_64.zip' -OutFile '.\Natron-2.5.0-Windows-x86_64.zip' # https://natrongithub.github.io/
