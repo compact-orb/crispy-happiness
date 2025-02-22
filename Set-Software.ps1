@@ -6,7 +6,7 @@ param (
     [string]
     $GPU,
     [Parameter(Position = 2)]
-    [string]
+    [string[]]
     $Software
 )
 if ($OS -eq 'Windows') {
@@ -21,7 +21,9 @@ if ($GPU -eq 'Azure NVIDIA GRID' -or $GPU -eq 'Azure NVv4') {
 else {
     Write-Host -Object "GPU: $GPU (Invalid)"
 }
-if ($Software -eq 'Natron') {
+$validSoftware = @('Parsec', 'qBittorrent', 'OBS Studio', 'Natron')
+$invalidSoftware = $Software | Where-Object { $_ -notin $validSoftware }
+if ($invalidSoftware.Count -eq 0) {
     Write-Host -Object "Software: $Software (Valid)"
 }
 else {
@@ -42,7 +44,22 @@ if ($OS -eq 'Windows') {
         Start-Process -FilePath '.\AMD-Azure-NVv4-Driver-23Q3-winsvr2022.exe' -Wait # Test
         Remove-Item -Path '.\AMD-Azure-NVv4-Driver-23Q3-winsvr2022.exe'
     }
-    if ($Software -eq 'Natron') {
+    if ($Software -contains 'Parsec') {
+        Invoke-WebRequest -Uri 'https://builds.parsec.app/package/parsec-windows.exe' -OutFile '.\parsec-windows.exe' # https://parsec.app/downloads
+        Start-Process -FilePath '.\parsec-windows.exe' -Wait
+        Remove-Item -Path '.\parsec-windows.exe'
+    }
+    if ($Software -contains 'qBittorrent') {
+        Invoke-WebRequest -Uri 'https://onboardcloud.dl.sourceforge.net/project/qbittorrent/qbittorrent-win32/qbittorrent-5.0.4/qbittorrent_5.0.4_x64_setup.exe?viasf=1' -OutFile '.\qbittorrent_5.0.4_x64_setup.exe' # https://www.qbittorrent.org/download
+        Start-Process -FilePath '.\qbittorrent_5.0.4_x64_setup.exe' -Wait
+        Remove-Item -Path 'qbittorrent_5.0.4_x64_setup.exe'
+    }
+    if ($Software -contains 'OBS Studio') {
+        Invoke-WebRequest -Uri 'https://cdn-fastly.obsproject.com/downloads/OBS-Studio-31.0.1-Windows-Installer.exe' -OutFile '.\OBS-Studio-31.0.1-Windows-Installer.exe' # https://obsproject.com/download
+        Start-Process -FilePath '.\OBS-Studio-31.0.1-Windows-Installer.exe' -Wait
+        Remove-Item -Path '.\OBS-Studio-31.0.1-Windows-Installer.exe'
+    }
+    if ($Software -contains 'Natron') {
         Invoke-WebRequest -Uri 'https://github.com/NatronGitHub/Natron/releases/download/v2.5.0/Natron-2.5.0-Windows-x86_64.zip' -OutFile '.\Natron-2.5.0-Windows-x86_64.zip' # https://natrongithub.github.io/
         Expand-Archive -Path '.\Natron-2.5.0-Windows-x86_64.zip' -DestinationPath '.'
         Start-Process -FilePath '.\Natron-2.5.0-Windows-x86_64\Setup.exe' -Wait
