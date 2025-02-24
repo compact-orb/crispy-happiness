@@ -49,6 +49,11 @@ if ($Os -eq 'Windows') {
         Start-Process -FilePath '.\parsec-windows.exe' -Wait
         Remove-Item -Path '.\parsec-windows.exe'
     }
+    if ($Software -contains 'OneDrive') {
+        Invoke-WebRequest -Uri 'https://oneclient.sfx.ms/Win/Installers/25.005.0112.0003/amd64/OneDriveSetup.exe' -OutFile '.\OneDriveSetup.exe' # https://www.microsoft.com/en-us/microsoft-365/onedrive/download
+        Start-Process -FilePath '.\OneDriveSetup.exe' -Wait
+        Remove-Item -Path '.\OneDriveSetup.exe'
+    }
     if ($Software -contains 'qBittorrent') {
         Invoke-WebRequest -Uri 'https://onboardcloud.dl.sourceforge.net/project/qbittorrent/qbittorrent-win32/qbittorrent-5.0.4/qbittorrent_5.0.4_x64_setup.exe?viasf=1' -OutFile '.\qbittorrent_5.0.4_x64_setup.exe' # https://www.qbittorrent.org/download
         Start-Process -FilePath '.\qbittorrent_5.0.4_x64_setup.exe' -Wait
