@@ -71,4 +71,3 @@ if ($Os -eq 'Windows') {
         Remove-Item -Path '.\Natron-2.5.0-Windows-x86_64.zip', '.\Natron-2.5.0-Windows-x86_64' -Recurse
     }
 }
-Restart-Computer -Force
