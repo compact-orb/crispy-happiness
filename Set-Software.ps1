@@ -51,7 +51,7 @@ if ($Os -eq 'Windows') {
     }
     if ($Software -contains 'VB-CABLE') {
         Invoke-WebRequest -Uri 'https://download.vb-audio.com/Download_CABLE/VBCABLE_Driver_Pack45.zip' -OutFile '.\VBCABLE_Driver_Pack45.zip' # https://vb-audio.com/Cable/index.htm
-        Expand-Archive -Path '.\VBCABLE_Driver_Pack45.zip' -DestinationPath '.'
+        Expand-Archive -Path '.\VBCABLE_Driver_Pack45.zip' -DestinationPath '.\VBCABLE_Driver_Pack45'
         Start-Process -FilePath '.\VBCABLE_Driver_Pack45\VBCABLE_Setup_x64.exe' -Wait
         Remove-Item -Path '.\VBCABLE_Driver_Pack45.zip', '.\VBCABLE_Driver_Pack45' -Recurse
     }
