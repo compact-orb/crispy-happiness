@@ -21,7 +21,7 @@ if ($Gpu -eq 'Azure NVIDIA GRID' -or $Gpu -eq 'Azure NVv4') {
 else {
     Write-Host -Object "GPU: $Gpu (Invalid)"
 }
-$validSoftware = @('Parsec', 'qBittorrent', 'OBS Studio', 'Natron')
+$validSoftware = @('Parsec', 'OneDrive', 'qBittorrent', '7-Zip', 'OBS Studio', 'Natron')
 $invalidSoftware = $Software | Where-Object { $_ -notin $validSoftware }
 if ($invalidSoftware.Count -eq 0) {
     Write-Host -Object "Software: $Software (Valid)"
