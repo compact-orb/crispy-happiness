@@ -21,7 +21,7 @@ if ($Gpu -eq 'Azure NVIDIA GRID' -or $Gpu -eq 'Azure NVv4') {
 else {
     Write-Host -Object "GPU: $Gpu (Invalid)"
 }
-$validSoftware = @('Parsec', 'OneDrive', 'qBittorrent', '7-Zip', 'OBS Studio', 'Natron')
+$validSoftware = @('Parsec', 'VB-CABLE', 'OneDrive', 'qBittorrent', '7-Zip', 'OBS Studio', 'Natron')
 $invalidSoftware = $Software | Where-Object { $_ -notin $validSoftware }
 if ($invalidSoftware.Count -eq 0) {
     Write-Host -Object "Software: $Software (Valid)"
@@ -48,6 +48,12 @@ if ($Os -eq 'Windows') {
         Invoke-WebRequest -Uri 'https://builds.parsec.app/package/parsec-windows.exe' -OutFile '.\parsec-windows.exe' # https://parsec.app/downloads
         Start-Process -FilePath '.\parsec-windows.exe' -Wait
         Remove-Item -Path '.\parsec-windows.exe'
+    }
+    if ($Software -contains 'VB-CABLE') {
+        Invoke-WebRequest -Uri 'https://download.vb-audio.com/Download_CABLE/VBCABLE_Driver_Pack45.zip' -OutFile '.\VBCABLE_Driver_Pack45.zip' # https://vb-audio.com/Cable/index.htm
+        Expand-Archive -Path '.\VBCABLE_Driver_Pack45.zip' -DestinationPath '.'
+        Start-Process -FilePath '.\VBCABLE_Driver_Pack45\VBCABLE_Setup_x64.exe' -Wait
+        Remove-Item -Path '.\VBCABLE_Driver_Pack45.zip', '.\VBCABLE_Driver_Pack45' -Recurse
     }
     if ($Software -contains 'OneDrive') {
         Invoke-WebRequest -Uri 'https://oneclient.sfx.ms/Win/Installers/25.005.0112.0003/amd64/OneDriveSetup.exe' -OutFile '.\OneDriveSetup.exe' # https://www.microsoft.com/en-us/microsoft-365/onedrive/download
